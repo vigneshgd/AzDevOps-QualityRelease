@@ -28,7 +28,7 @@ resource "azurerm_linux_virtual_machine" "test" {
     ]
   admin_ssh_key {
     username       = "${var.admin_user}"
-    public_key           = file("~/.ssh/id_rsa.pub")
+    public_key = file("/home/vsts/work/_temp/udacity_azure.pub")
   }
   os_disk {
     caching           = "ReadWrite"
@@ -37,7 +37,7 @@ resource "azurerm_linux_virtual_machine" "test" {
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
-    sku       = "16.04-LTS"
+    sku       = "18.04-LTS"
     version   = "latest"
   }
   tags = {
