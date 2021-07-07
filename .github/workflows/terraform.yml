@@ -21,3 +21,10 @@ jobs:
           tf_actions_comment: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  shelljob:
+    name: "Demo"
+    runs-on: ubuntu-latest
+    steps:
+     - name: "Checking Terraform Github actions"
+       run: curl www.github.com
+       shell: bash
