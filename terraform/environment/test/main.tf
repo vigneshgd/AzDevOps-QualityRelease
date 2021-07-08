@@ -86,6 +86,7 @@ module "vm" {
   resource_group   = "${module.resource_group.resource_group_name}"  
   tier              = "${var.tier}"
   deployment        = "${var.deployment}"
+  resource_type     = "VM"
   vm_size           = "${var.vm_size}"
   admin_user        = "${var.admin_user}"
   admin_pass        = "${var.admin_pass}"

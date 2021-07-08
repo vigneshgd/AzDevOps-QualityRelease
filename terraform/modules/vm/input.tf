@@ -1,5 +1,6 @@
 variable location {}
 variable "resource_group" {}
+variable "resource_type" {}
 variable "application_type" {}
 variable  "vm_size" {}
 variable  "admin_user" {}

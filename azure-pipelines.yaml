@@ -143,8 +143,9 @@ stages:
   - deployment: deployment_vm
     displayName: Deploy Virtual Machine
     environment:
-      name: 'test'
-      resourceType: VM
+      name: 'AzDevOps-Module3-Application-VM'
+      tags: 'deployment: Terraform'
+      tags: 'tier: Test'
     strategy:
       runOnce:
         deploy:
