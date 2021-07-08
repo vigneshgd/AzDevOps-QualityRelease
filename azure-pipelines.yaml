@@ -141,11 +141,10 @@ stages:
               deploymentMethod: zipDeploy
 
   - deployment: deployment_vm
-    displayName: Deploy Virtual Machine
+    displayName: Deploying Virtual Machine
     environment:
       name: 'AzDevOps-Module3-Application-VM'
       tags: 'deployment: Terraform'
-      tags: 'tier: Test'
     strategy:
       runOnce:
         deploy:
