@@ -135,7 +135,7 @@ stages:
             displayName: Deploy Azure WebApp
             inputs:
               azureSubscription: 'tstate-sc'
-              appName: 'AzDevOps-Module3-Application'
+              appName: 'AzDevOps-Module3-Application-AppService'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/fakerestapi-$(Build.BuildId).zip
               deploymentMethod: zipDeploy
