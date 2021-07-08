@@ -145,7 +145,6 @@ stages:
     environment:
       name: 'AzDevOps-Module3-Application-VM'
       tags: 'deployment: Terraform'
-      tags: 'tier: Test'
     strategy:
       runOnce:
         deploy:
