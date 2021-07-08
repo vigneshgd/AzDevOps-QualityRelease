@@ -145,6 +145,7 @@ stages:
     environment:
       name: 'test'
       tags: 'deployment: Terraform'
+      resourceType: 'VM'
     strategy:
       runOnce:
         deploy:
