@@ -31,10 +31,10 @@ stages:
 
     - bash: |
         echo Creating dir structure
-        mkdir -p $(System.DefaultWorkingDirectory)/terraform/environment/test
+        mkdir -p $(System.DefaultWorkingDirectory)/terraform/environments/test
         echo Copying terraform.tfvars
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environment/test
-        ls -lrt $(System.DefaultWorkingDirectory)/terraform/environment/test
+        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+        ls -lrt $(System.DefaultWorkingDirectory)/terraform/environments/test
       displayName: Copy & List terraform.tfvars
 
     - bash: |
@@ -71,7 +71,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstatestact01'
         backendAzureRmContainerName: 'tstate-container'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
     - task: TerraformTaskV1@0
       displayName: Terraform Apply
@@ -80,7 +80,7 @@ stages:
         command: 'apply'
         commandOptions: |
           -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'tstate-sc'
 
 - stage: Build
