@@ -6,8 +6,8 @@ tenant_id = "29913035-c436-4a18-9abf-c2348f989187"
 
 # Resource Group/Location
 location = "eastus"
-resource_group = "AzDevOpsMod3"
-application_type = "AzDevOpsMod3"
+resource_group = "qualityrelease"
+application_type = "qualityrelease"
 sku_tier = "Free"
 sku_size = "F1"
 
