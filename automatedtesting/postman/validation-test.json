@@ -88,7 +88,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/update/{{id}}",
+					"raw": "http://dummy.restapiexample.com/api/v1/update/{{empid}}",
 					"protocol": "http",
 					"host": [
 						"dummy",
@@ -99,7 +99,7 @@
 						"api",
 						"v1",
 						"update",
-						"{{id}}"
+						"{{empid}}"
 					]
 				}
 			},
@@ -188,7 +188,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/delete/{{id}}",
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/{{empid}}",
 					"protocol": "http",
 					"host": [
 						"dummy",
@@ -199,7 +199,7 @@
 						"api",
 						"v1",
 						"delete",
-						"{{id}}"
+						"{{empid}}"
 					]
 				}
 			},

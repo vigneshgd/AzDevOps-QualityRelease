@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "a837e746-8941-47ae-b250-e87152559841",
-		"name": "Regression Test",
+		"_postman_id": "e7641c44-82c0-440e-9118-2478bd92e5a0",
+		"name": "Az DevOps Mod3 Regression Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,7 +11,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ded58463-2520-4358-91f0-eec5bf5a7da9",
+						"id": "a9a28a4b-f43c-4b4e-ae96-b7a842a74c1a",
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
@@ -28,7 +28,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"{{name}}\",\n    \"salary\": \"{{salary}}\",\n    \"age\": \"{{age}}\"\n}",
+					"raw": "{\n    \"name\": \"Tom Adam}}\",\n    \"salary\": \"15200\",\n    \"age\": \"52\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -58,7 +58,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "ca903a60-6c42-4529-9232-60006a5cee1f",
+						"id": "69ad3f6d-95f4-4960-9458-eb405a3c869c",
 						"exec": [
 							"pm.test(\"Successful response\", function () {",
 							"    pm.expect(pm.response.text()).to.include(\"success\");",
@@ -90,14 +90,17 @@
 			"response": []
 		},
 		{
-			"name": "Update Employee",
+			"name": "Update Employee by Emp ID",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "4f91732a-ecda-4774-aa0d-b8f1ecbc43c7",
+						"id": "95b291c8-71da-4261-898c-95e1e863feb4",
 						"exec": [
-							""
+								"pm.test(\"Update employee by id\", function () {\r",
+								"    pm.expect(pm.response.text()).to.include(\"Twixon\");\r",
+								"});\r",
+								""
 						],
 						"type": "text/javascript"
 					}
@@ -121,10 +124,15 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "\t{\r\n\t\t\"name\":\"employee updated\",\r\n\t\t\"salary\":\"1123\",\r\n\t\t\"age\":\"23\"\r\n\t}"
+					"raw": "{\r\n    \"id\": \"{{empid}}\",\r\n    \"employee_name\": \"Robert Jackson\",\r\n    \"employee_salary\": 24800,\r\n    \"employee_age\": 41,\r\n    \"profile_image\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/update/21",
+					"raw": "http://dummy.restapiexample.com/api/v1/update/{{empid}}",
 					"protocol": "http",
 					"host": [
 						"dummy",
@@ -135,7 +143,7 @@
 						"api",
 						"v1",
 						"update",
-						"21"
+						"{{myid}}"
 					]
 				}
 			},
@@ -147,7 +155,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "803c02b5-8647-4bc0-b4e1-1cfda0022648",
+						"id": "e3c4fd89-94e8-4e25-a8c5-596347ae9b52",
 						"exec": [
 							"pm.test(\"Successful response\", function () {\r",
 							"    pm.expect(pm.response.text()).to.include(\"success\");\r",
@@ -162,7 +170,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://dummy.restapiexample.com/api/v1/delete/2",
+					"raw": "http://dummy.restapiexample.com/api/v1/delete/{{empid}}",
 					"protocol": "http",
 					"host": [
 						"dummy",
@@ -173,7 +181,7 @@
 						"api",
 						"v1",
 						"delete",
-						"2"
+						"{{empid}}"
 					]
 				}
 			},
