@@ -8,8 +8,8 @@ tenant_id = "29913035-c436-4a18-9abf-c2348f989187"
 location = "eastus"
 resource_group = "qualityrelease"
 application_type = "qualityrelease"
-sku_tier = "Free"
-sku_size = "F1"
+sku_tier = "Shared"
+sku_size = "D1"
 
 # Tags
 tier = "Test"
