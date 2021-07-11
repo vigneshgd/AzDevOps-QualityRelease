@@ -73,20 +73,20 @@ stages:
         backendAzureRmKey: 'terraform.tfstate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
-- task: TerraformTaskV2@2
-  displayName: Terraform Apply
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    commandOptions: |
-      -auto-approve     
-    backendServiceArm: 'tstate-sc'
-    backendAzureRmResourceGroupName: 'tstate-rg'
-    backendAzureRmStorageAccountName: 'tstatestact01'
-    backendAzureRmContainerName: 'tstate-container'
-    backendAzureRmKey: 'terraform.tfstate'  
-    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-    environmentServiceNameAzureRM: 'tstate-sc'
+    - task: TerraformTaskV2@2
+      displayName: Terraform Apply
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        commandOptions: |
+          -auto-approve     
+        backendServiceArm: 'tstate-sc'
+        backendAzureRmResourceGroupName: 'tstate-rg'
+        backendAzureRmStorageAccountName: 'tstatestact01'
+        backendAzureRmContainerName: 'tstate-container'
+        backendAzureRmKey: 'terraform.tfstate'  
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+        environmentServiceNameAzureRM: 'tstate-sc'
 
 - stage: Build
   jobs:
