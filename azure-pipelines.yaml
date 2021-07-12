@@ -30,6 +30,7 @@ stages:
         sshKeySecureFile: 'udacity_azure'
 
     - bash: |
+        echo $(tf-vm-pub-key)
         echo Creating dir structure
         mkdir -p $(System.DefaultWorkingDirectory)/terraform/environments/test
         echo Copying terraform.tfvars
