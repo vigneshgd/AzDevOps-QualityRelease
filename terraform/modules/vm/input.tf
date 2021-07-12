@@ -4,8 +4,7 @@ variable "resource_type" {}
 variable "application_type" {}
 variable  "vm_size" {}
 variable  "admin_user" {}
-variable "admin_pass" {}
-variable  "vm_ssh_key" {}
+variable  "admin_pass" {}
 variable  "tier" {}
 variable  "deployment" {}
 variable  "subnet_id" {}

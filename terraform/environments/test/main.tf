@@ -90,7 +90,6 @@ module "vm" {
   vm_size           = "${var.vm_size}"
   admin_user        = "${var.admin_user}"
   admin_pass        = "${var.admin_pass}"
-  vm_ssh_key        = "${var.vm_ssh_key}"
   location         = "${var.location}"
   application_type = "${var.application_type}"
   subnet_id        = "${module.network.subnet_id_test}"
