@@ -73,18 +73,13 @@ stages:
         backendAzureRmKey: 'terraform.tfstate'
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
-    - task: TerraformTaskV2@2
+    - task: TerraformTaskV1@0
       displayName: Terraform Apply
       inputs:
         provider: 'azurerm'
         command: 'apply'
         commandOptions: |
-          -auto-approve     
-        backendServiceArm: 'tstate-sc'
-        backendAzureRmResourceGroupName: 'tstate-rg'
-        backendAzureRmStorageAccountName: 'tstatestact01'
-        backendAzureRmContainerName: 'tstate-container'
-        backendAzureRmKey: 'terraform.tfstate'  
+          -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'tstate-sc'
 
@@ -184,7 +179,7 @@ stages:
           - task: AzureWebApp@1
             displayName: Deploy Azure WebApp
             inputs:
-              azureSubscription: 'tstate-sc'
+              azureSubscription: 'Azure Subscription 1'
               appName: 'qualityrelease'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/fakerestapi-$(Build.BuildId).zip
@@ -368,4 +363,3 @@ stages:
           -auto-approve 
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
         environmentServiceNameAzureRM: 'tstate-sc'
-
