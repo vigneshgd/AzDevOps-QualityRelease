@@ -326,7 +326,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'known_hosts'
-        sshPublicKey: $(aps-tf-public-key)
+        sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBDTjvuUwKp9tSdFrq9rtdjVTj8eO3oAigT5XbyNSPKaN4N6kZesvn9IJSjAo4DT5UTOrjNVpARjRuQFsyNo9ko7Ig6RnmAOYt3i7iw5IyeyHRa+OengzGrPVI1kiiN0vlezUJa89Gzf9rUR6X0r9WhonxRB9J26MS0HuQleMFBUGgeQU37kftvaSAP+f0L1pbMz2+/3k8nYvix9To9sDUPCOJ827VG4cBne5bUU1lWyd00xROPboQMX2VTSLsS2iHHmsZfdARm6zAO/RCXTRwc8+MGxw2TkiwHxYNDFQA0QnjC9Se4SMVPtGZEz9Mhimi9hJTk5/uT7OMpE4hmj3v
         sshKeySecureFile: 'udacity_azure'
 
     - bash: |
