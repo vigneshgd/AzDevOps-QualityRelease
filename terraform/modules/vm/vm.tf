@@ -21,15 +21,14 @@ resource "azurerm_linux_virtual_machine" "test" {
   resource_group_name  = "${var.resource_group}"
   size                 = "${var.vm_size}"
   admin_username       = "${var.admin_user}"
-  admin_password       = "${var.admin_pass}"
   disable_password_authentication = "true"
   network_interface_ids = [
     azurerm_network_interface.test.id,
     ]
   admin_ssh_key {
     username       = "${var.admin_user}"
-#    public_key = file("/home/vsts/work/_temp/udacity_azure.pub")
-    public_key = "${var.vm_ssh_key}"
+    public_key = file("/home/vsts/work/_temp/udacity_azure.pub")
+#    public_key = "${var.vm_ssh_key}"
   }
   os_disk {
     caching           = "ReadWrite"

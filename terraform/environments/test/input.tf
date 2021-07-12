@@ -24,4 +24,3 @@ variable address_space {}
 #VM
 variable "vm_size" {}
 variable "admin_user" {}
-variable "admin_pass" {}
