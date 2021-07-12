@@ -26,7 +26,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'known_hosts'
-        sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBDTjvuUwKp9tSdFrq9rtdjVTj8eO3oAigT5XbyNSPKaN4N6kZesvn9IJSjAo4DT5UTOrjNVpARjRuQFsyNo9ko7Ig6RnmAOYt3i7iw5IyeyHRa+OengzGrPVI1kiiN0vlezUJa89Gzf9rUR6X0r9WhonxRB9J26MS0HuQleMFBUGgeQU37kftvaSAP+f0L1pbMz2+/3k8nYvix9To9sDUPCOJ827VG4cBne5bUU1lWyd00xROPboQMX2VTSLsS2iHHmsZfdARm6zAO/RCXTRwc8+MGxw2TkiwHxYNDFQA0QnjC9Se4SMVPtGZEz9Mhimi9hJTk5/uT7OMpE4hmj3v
+        sshPublicKey: $(tf-vm-pub-key)
         sshKeySecureFile: 'udacity_azure'
 
     - bash: |
@@ -43,7 +43,9 @@ stages:
         cd $(Agent.TempDirectory)
         pwd
         ls -la
-        cat udacity_azure.pub
+        echo $(tf-vm-pub-key) > /home/vsts/work/_temp/udacity_azure.pub
+        echo Displaying public key contents
+        cat /home/vsts/work/_temp/udacity_azure.pub
         cd ~/.ssh/
         pwd
         ls -lart
@@ -179,7 +181,7 @@ stages:
           - task: AzureWebApp@1
             displayName: Deploy Azure WebApp
             inputs:
-              azureSubscription: 'tstate-sc'
+              azureSubscription: 'Azure subscription 1(97753398-f685-4bc7-a3e9-9b86929f6c92)'
               appName: 'qualityrelease'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/fakerestapi-$(Build.BuildId).zip
@@ -187,9 +189,9 @@ stages:
 
   - deployment: deployment_vm
     displayName: Deploying Virtual Machine
-    environment:
-      name: 'test'
-      resourceType: 'VM'
+    pool:
+      vmImage: 'ubuntu-latest'    
+    environment: 'test'
     strategy:
       runOnce:
         deploy:
@@ -226,9 +228,7 @@ stages:
   jobs:
   - deployment: test_vm
     displayName: Test on Virtual Machine
-    environment:
-      name: 'test'
-      resourceType: VM
+    environment: 'test'
     strategy:
       runOnce:
         deploy:
@@ -328,11 +328,11 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'known_hosts'
-        sshPublicKey: $(aps-tf-public-key)
+        sshPublicKey: $(tf-vm-pub-key)
         sshKeySecureFile: 'udacity_azure'
 
     - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environment/test
+        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
       displayName: Copy terraform.tfvars
 
     # install Terraform Azure Pipelines Extension by Microsoft DevLabs
@@ -352,7 +352,7 @@ stages:
         backendAzureRmStorageAccountName: 'tstatestact01'
         backendAzureRmContainerName: 'tstate-container'
         backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
     - task: TerraformTaskV1@0
       displayName: Terraform Destroy
@@ -361,5 +361,5 @@ stages:
         command: 'destroy'
         commandOptions: |
           -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environment/test'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
         environmentServiceNameAzureRM: 'tstate-sc'
