@@ -179,7 +179,7 @@ stages:
           - task: AzureWebApp@1
             displayName: Deploy Azure WebApp
             inputs:
-              azureSubscription: 'Azure subscription 1(97753398-f685-4bc7-a3e9-9b86929f6c92)'
+              azureSubscription: 'Azure Subscription 1'
               appName: 'qualityrelease'
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/fakerestapi-$(Build.BuildId).zip
@@ -187,9 +187,9 @@ stages:
 
   - deployment: deployment_vm
     displayName: Deploying Virtual Machine
-    environment:
-      name: 'test'
-      resourceType: 'VM'
+    pool:
+      vmImage: 'ubuntu-latest'    
+    environment: 'test'
     strategy:
       runOnce:
         deploy:
@@ -226,9 +226,7 @@ stages:
   jobs:
   - deployment: test_vm
     displayName: Test on Virtual Machine
-    environment:
-      name: 'test'
-      resourceType: VM
+    environment: 'test'
     strategy:
       runOnce:
         deploy:
