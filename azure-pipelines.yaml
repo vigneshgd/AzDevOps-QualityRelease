@@ -44,7 +44,8 @@ stages:
         pwd
         ls -la
         echo $(tf-vm-pub-key) > /home/vsts/work/_temp/udacity_azure.pub
-        cat udacity_azure.pub
+        echo Displaying public key contents
+        cat /home/vsts/work/_temp/udacity_azure.pub
         cd ~/.ssh/
         pwd
         ls -lart
