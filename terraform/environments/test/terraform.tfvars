@@ -24,5 +24,6 @@ address_prefix_test = ["10.5.1.0/24"]
 #VM
 vm_size = "Standard_D2s_v3"
 admin_user = "devopsadmin"
+admin_password = "Password@1new"
 vm_ssh_key = "AAAAB3NzaC1yc2EAAAABIwAAAQEArIood27UiDWIquKG6eT/vaMeCdVdcIEnzFn9UAMCd9RRQrESQKXSpMhpJWA9KDOOlHKG2R/uqDqv2z4hxRy3vCyTj+J9EnWnoFvPkiQijCQ4K+KcF9dEL7EP4WQD9H5eYGl0HyoKx6vzSBt3ZQydWOOfTdCGQueSpjp2b+hpFZvg6D54EVtCXzdQhkMTL30ehPZjdCwu6M2dzOILGJpfathb4S1DzTVaerujm3uPTCtfchOkQJb4TUFbraU56vb9fzs7HHh2hWOCvrkgRAkBiqO2BwdS+vRvfxN9l3u1j99n3gBrxDkDqJ32FZ7iTif77sA1c57j2dnIs3LUS3U6kw== qualityrelease"
 #subnet_id_test = ""
