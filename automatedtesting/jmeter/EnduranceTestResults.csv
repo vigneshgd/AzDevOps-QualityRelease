@@ -1,0 +1,9 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1626130653900,557,Get Books,200,OK,Endurance Test 1-1,text,true,,910959,146,2,2,https://qualityrelease.azurewebsites.net/api/Books,387,0,176
+1626130654458,29,Post Books,200,OK,Endurance Test 1-1,text,true,,262,230,2,2,https://qualityrelease.azurewebsites.net/api/Books,29,0,0
+1626130654487,130,Get Book,200,OK,Endurance Test 1-1,text,true,,3856,152,2,2,https://qualityrelease.azurewebsites.net/api/Books/?id=1,130,0,0
+1626130654617,30,Delete Book,200,OK,Endurance Test 1-1,,true,,211,242,2,2,https://qualityrelease.azurewebsites.net/api/Books/?id=1,30,0,0
+1626130654647,150,Get Books,200,OK,Endurance Test 1-1,text,true,,911014,146,2,2,https://qualityrelease.azurewebsites.net/api/Books,111,0,0
+1626130654797,90,Post Books,200,OK,Endurance Test 1-1,text,true,,262,230,2,2,https://qualityrelease.azurewebsites.net/api/Books,90,0,0
+1626130654887,99,Get Book,200,OK,Endurance Test 1-1,text,true,,4808,152,2,2,https://qualityrelease.azurewebsites.net/api/Books/?id=3,99,0,0
+1626130654397,650,Get Books,200,OK,Endurance Test 1-2,text,true,,924376,146,1,1,https://qualityrelease.azurewebsites.net/api/Books,481,0,250
