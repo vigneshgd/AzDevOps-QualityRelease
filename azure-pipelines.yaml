@@ -76,18 +76,6 @@ stages:
         workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
 
     - task: TerraformTaskV1@0
-      displayName: Terraform Force unlock
-      inputs:
-        provider: 'azurerm'
-        command: 'force-unlock a161d109-2d1f-9409-2782-cb5ca7fd30d6'
-        backendServiceArm: 'tstate-sc'
-        backendAzureRmResourceGroupName: 'tstate-rg'
-        backendAzureRmStorageAccountName: 'tstatestact01'
-        backendAzureRmContainerName: 'tstate-container'
-        backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-
-    - task: TerraformTaskV1@0
       displayName: Terraform Apply
       inputs:
         provider: 'azurerm'
