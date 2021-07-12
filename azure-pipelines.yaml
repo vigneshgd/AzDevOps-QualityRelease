@@ -309,55 +309,55 @@ stages:
         targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
         artifactName: 'drop-jmeter-logs'
 
-- stage: Destroy
-  jobs:
-  - job: destroy_azure_infrastructure
-    displayName: Destroy Azure Infrastructure
-    pool:
-      vmImage: 'ubuntu-latest'
-    steps:
-    - task: DownloadSecureFile@1
-      name: tfvardef
-      displayName: Download terraform.tfvars
-      inputs:
-        secureFile: 'terraform.tfvars' 
-
-    # Needed for Terraform VM deployment
-    - task: InstallSSHKey@0
-      inputs:
-        knownHostsEntry: 'known_hosts'
-        sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBDTjvuUwKp9tSdFrq9rtdjVTj8eO3oAigT5XbyNSPKaN4N6kZesvn9IJSjAo4DT5UTOrjNVpARjRuQFsyNo9ko7Ig6RnmAOYt3i7iw5IyeyHRa+OengzGrPVI1kiiN0vlezUJa89Gzf9rUR6X0r9WhonxRB9J26MS0HuQleMFBUGgeQU37kftvaSAP+f0L1pbMz2+/3k8nYvix9To9sDUPCOJ827VG4cBne5bUU1lWyd00xROPboQMX2VTSLsS2iHHmsZfdARm6zAO/RCXTRwc8+MGxw2TkiwHxYNDFQA0QnjC9Se4SMVPtGZEz9Mhimi9hJTk5/uT7OMpE4hmj3v
-        sshKeySecureFile: 'udacity_azure'
-
-    - bash: |
-        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
-      displayName: Copy terraform.tfvars
-
-    # install Terraform Azure Pipelines Extension by Microsoft DevLabs
-    # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
-    - task: TerraformInstaller@0
-      displayName: Install Terraform
-      inputs:
-        terraformVersion: '0.13.5'
-
-    - task: TerraformTaskV1@0
-      displayName: Terraform Init
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        backendServiceArm: 'tstate-sc'
-        backendAzureRmResourceGroupName: 'tstate-rg'
-        backendAzureRmStorageAccountName: 'tstatestact01'
-        backendAzureRmContainerName: 'tstate-container'
-        backendAzureRmKey: 'terraform.tfstate'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-
-    - task: TerraformTaskV1@0
-      displayName: Terraform Destroy
-      inputs:
-        provider: 'azurerm'
-        command: 'destroy'
-        commandOptions: |
-          -auto-approve 
-        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-        environmentServiceNameAzureRM: 'tstate-sc'
+#- stage: Destroy
+#  jobs:
+#  - job: destroy_azure_infrastructure
+#    displayName: Destroy Azure Infrastructure
+#    pool:
+#      vmImage: 'ubuntu-latest'
+#    steps:
+#    - task: DownloadSecureFile@1
+##      name: tfvardef
+#      displayName: Download terraform.tfvars
+#      inputs:
+##        secureFile: 'terraform.tfvars' 
+#
+#    # Needed for Terraform VM deployment
+#    - task: InstallSSHKey@0
+#      inputs:
+#        knownHostsEntry: 'known_hosts'
+#        sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBDTjvuUwKp9tSdFrq9rtdjVTj8eO3oAigT5XbyNSPKaN4N6kZesvn9IJSjAo4DT5UTOrjNVpARjRuQFsyNo9ko7Ig6RnmAOYt3i7iw5IyeyHRa+OengzGrPVI1kiiN0vlezUJa89Gzf9rUR6X0r9WhonxRB9J26MS0HuQleMFBUGgeQU37kftvaSAP+f0L1pbMz2+/3k8nYvix9To9sDUPCOJ827VG4cBne5bUU1lWyd00xROPboQMX2VTSLsS2iHHmsZfdARm6zAO/RCXTRwc8+MGxw2TkiwHxYNDFQA0QnjC9Se4SMVPtGZEz9Mhimi9hJTk5/uT7OMpE4hmj3v
+#        sshKeySecureFile: 'udacity_azure'
+#
+#    - bash: |
+#        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
+#      displayName: Copy terraform.tfvars
+#
+#    # install Terraform Azure Pipelines Extension by Microsoft DevLabs
+#    # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
+#    - task: TerraformInstaller@0
+#      displayName: Install Terraform
+#      inputs:
+#        terraformVersion: '0.13.5'#
+#
+#    - task: TerraformTaskV1@0
+#      displayName: Terraform Init
+#      inputs:
+#        provider: 'azurerm'
+#        command: 'init'
+#        backendServiceArm: 'tstate-sc'
+#        backendAzureRmResourceGroupName: 'tstate-rg'
+#        backendAzureRmStorageAccountName: 'tstatestact01'
+#        backendAzureRmContainerName: 'tstate-container'
+#        backendAzureRmKey: 'terraform.tfstate'
+#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+#
+#    - task: TerraformTaskV1@0
+#      displayName: Terraform Destroy
+#      inputs:
+#        provider: 'azurerm'
+#        command: 'destroy'
+#        commandOptions: |
+#          -auto-approve 
+#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
+#        environmentServiceNameAzureRM: 'tstate-sc'
