@@ -227,20 +227,19 @@ stages:
               find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete  # delete everything except 'selenium-$(Build.BuildId).zip'
               echo unpacking Selenium Build
               unzip -o selenium-$(Build.BuildId).zip
+              pwd
               ls -lart
               echo Creating Selenium Log dir
               sudo mkdir -p /var/log/selenium
               sudo chmod 777 /var/log/selenium
-              cd $(System.DefaultWorkingDirectory)
-              # copying selenium logs to $(System.DefaultWorkingDirectory)/log/selenium/
-              mkdir -p log/selenium
+              touch /var/log/selenium/selenium-test.log
               pwd
+              ls -lart
               echo Starting Selenium Test Cases
               sudo python3 -u selenium-test.py 2>&1 | sudo tee -a /var/log/selenium/selenium-test.log
-              cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
               ls -lart
               echo Checking Selenium Test Results Log File content
-              cat log/selenium/selenium-test.log
+              cat /var/log/selenium/selenium-test.log
               echo End of Selenium Test Results Log File Content
             displayName: Configure selenium
 
