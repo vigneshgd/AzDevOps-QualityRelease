@@ -301,17 +301,19 @@ stages:
         ls -la
       displayName: Install JMeter
     - bash: |
+        echo Starting Standalone Stress Test @ $(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)
         apache-jmeter-5.4/bin/jmeter -n -t automatedtesting/jmeter/stress-test.jmx \
                                      -l log/jmeter/stress-test-result.csv \
                                      -e -f -o log/jmeter/stress-test-html-report \
                                      -j log/jmeter/jmeter-stress-test.log
-      displayName: JMeter stress test
+      displayName: JMeter Stress Test
     - bash: |
+        echo Starting Standalone Endurance Test @ $(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)
         apache-jmeter-5.4/bin/jmeter -n -t automatedtesting/jmeter/endurance-test.jmx \
                                      -l log/jmeter/endurance-test-result.csv \
                                      -e -f -o log/jmeter/endurance-test-html-report \
                                      -j log/jmeter/jmeter-endurance-test.log
-      displayName: JMeter endurance test
+      displayName: JMeter Endurance Test
     - task: ArchiveFiles@2
       displayName: Archive JMeter stress test HTML report
       inputs:
