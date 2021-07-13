@@ -57,18 +57,16 @@ This file will be referenced in azure-pipelines.yaml
 
 Make sure `terraform apply` command is successful without any errors. Next, delete the resources by running `terraform destroy` so that the infrastructure will be created using Az Pipeline.
 
-7. Build FakeRestAPI artifact by archiving the entire fakerestapi directory into a zip file and publishing the pipeline artifact to the artifact staging directory.
+7. Build FakeRestAPI artifact by archiving/packaging the fakerestapi directory into a zip file and publish the artifacts to the staging directory.
 
 8. Deploy FakeRestAPI artifact to the terraform deployed Azure App Service. The deployed webapp URL is [https://qualityrelease.azurewebsites.net](https://qualityrelease.azurewebsites.net) where `qualityrelease` is the Azure App Service resource name.
 
     ![image](https://user-images.githubusercontent.com/52568208/125407181-a13aaf80-e387-11eb-8aa9-867deb64321c.png)
 
 
-9. After terraform deployed the virtual machine in Azure Pipelines, we need to manually register such virtual machine in Pipelines --> Environments --> TEST --> Add resource --> Select "Virtual machines" --> Next --> In Operating system, select "Linux". Then copy the Registration script, manually ssh login to the virtual machine, paste it in the console and run. Such registration script makes the deployed Linux virtual machine an Azure Pipelines agent so Azure Pipelines can run bash commands there.
+9. After creating VM in Azure Pipelines, we must register the VM in Pipelines --> Environments --> TEST --> Add resource --> Select "Virtual machines" --> Next --> In Operating system, select "Linux".
 
     ![image](https://user-images.githubusercontent.com/52568208/125407432-de06a680-e387-11eb-9130-9cc5258b1069.png)
-
-    Then Azure Pipelines can run bash commands on the virtual machine deployed by terraform.
 
 10. [Create an Azure Log Analytics workspace.](https://docs.microsoft.com/en-us/azure/azure-monitor/learn/quick-create-workspace-cli)
 
@@ -78,26 +76,22 @@ Make sure `terraform apply` command is successful without any errors. Next, dele
 
     Follow the instructions to install the agent using the script: `wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w <YOUR WORKSPACE ID> -s <YOUR WORKSPACE PRIMARY KEY>` on the terraform deployed VM.
     
-    Both ID and primary key of the Log Analytics Workspace can be found in the Settings >> Agents management of the Log Analytics workspace and they can be set as secret variables for the pipeline.
+    Go to Settings --> Agents management under Log Analytics workspace to get Log Analytics Workspace ID and primary key and then set as secret variables for the pipeline.
 
-    After finishing installing the Log Analytics agent on the deployed VM, Settings >> Agents management should indicate that "1 Linux computers connected".
+    After setting up Log Analytics, you should see ""1 Linux computers connected"  under Settings --> Agents management.
 
     ![image](https://user-images.githubusercontent.com/52568208/125408493-f4613200-e388-11eb-8454-f5326a66d206.png)
 
 
-12. [Collect custom logs with Log Analytics agent in Azure Monitor.](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources-custom-logs)
+12. Follow instruction [Collect custom logs with Log Analytics agent in Azure Monitor.](https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources-custom-logs) to setup custom logs with Log Analytics.
 
     ![image](https://user-images.githubusercontent.com/52568208/125408853-5457d880-e389-11eb-965d-5ab0682bd6a5.png)
 
-13. [JMeter Command Line Options reference](http://sqa.fyicenter.com/1000056_JMeter_Command_Line_Options.html)
-
-14. [Newman Command Line Options reference](https://learning.postman.com/docs/running-collections/using-newman-cli/command-line-integration-with-newman/)
-
-15. Verify Azure Monitor Logs collected from the Log Analytics agent installed on the deployed VM.
+13. Verify Azure Monitor Logs collected from the Log Analytics agent installed on the deployed VM.
 
     ![image](https://user-images.githubusercontent.com/52568208/125409518-f8418400-e389-11eb-9efb-f065b5bd69d7.png)
 
-16. Overall, you should see a successful pipeline run, various artifacts published during each stage of the pipeline run and status of test results during each stage. 
+14. Overall, you should see a successful pipeline run, various artifacts published during each stage of the pipeline run and status of test results during each stage. 
 
 ![image](https://user-images.githubusercontent.com/52568208/125409915-5ec6a200-e38a-11eb-8db6-24578a4b3dc9.png)
 
