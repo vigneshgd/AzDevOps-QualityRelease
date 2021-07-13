@@ -246,7 +246,7 @@ stages:
               pwd
               sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
               ls -lart
-              echo Here's the selenium test results
+              echo Here is the selenium test results
               cat /var/log/selenium/selenium-test.log
               
             displayName: Run selenium tests
