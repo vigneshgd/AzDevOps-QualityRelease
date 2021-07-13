@@ -306,14 +306,14 @@ stages:
                                      -l log/jmeter/stress-test-result.csv \
                                      -e -f -o log/jmeter/stress-test-html-report \
                                      -j log/jmeter/jmeter-stress-test.log
-      displayName: JMeter Stress Test @ $(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)
+      displayName: JMeter Stress Test @ '$(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)'
     - bash: |
         echo Starting Standalone Endurance Test 
         apache-jmeter-5.4/bin/jmeter -n -t automatedtesting/jmeter/endurance-test.jmx \
                                      -l log/jmeter/endurance-test-result.csv \
                                      -e -f -o log/jmeter/endurance-test-html-report \
                                      -j log/jmeter/jmeter-endurance-test.log
-      displayName: JMeter Endurance Test @ $(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)
+      displayName: JMeter Endurance Test @ '$(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)'
     - task: ArchiveFiles@2
       displayName: Archive JMeter stress test HTML report
       inputs:
