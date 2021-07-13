@@ -6,7 +6,6 @@ trigger:
     exclude:
     - README.md
     - .gitignore
-    - screenshots/
 
 stages:
 - stage: Provision
@@ -252,38 +251,6 @@ stages:
 
 - stage: Test
   jobs:
-#  - deployment: test_vm
-#    displayName: Run Selenium Tests on VM
-#    environment: 'test'
-#    strategy:
-#      runOnce:
-#        deploy:
-#          steps:
-#          - bash: |
-#              hostname
-#              cd $(Pipeline.Workspace)/drop-selenium
-#              find . -type f ! -name 'selenium-$(Build.BuildId).zip' -delete  # delete everything except 'selenium-$(Build.BuildId).zip'
-#              unzip -o selenium-$(Build.BuildId).zip
-#              pwd
-#              ls -lart
-#              sudo mkdir -p /var/log/selenium
-#             sudo chmod 777 /var/log/selenium
-#             sudo python3 -u selenium-test.py 2>&1 | sudo tee -a /var/log/selenium/selenium-test.log
-#              cd $(System.DefaultWorkingDirectory)
-#              # copying selenium logs to $(System.DefaultWorkingDirectory)/log/selenium/
-#              mkdir -p log/selenium
-#              pwd
-#              cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
-#              ls -lart
-#              echo Checking selenium test results log file content
-#              cat log/selenium/selenium-test.log
-#              echo End of selenium test results log file content
-#            displayName: Run selenium tests
-#          - task: PublishPipelineArtifact@1
-#            displayName: Publish selenium logs
-#            inputs:
-#              targetPath: '$(System.DefaultWorkingDirectory)/log/selenium/selenium-test.log'
-#              artifactName: 'drop-selenium-logs'
   - job: test_jmeter
     displayName: Test JMeter
     pool:
@@ -306,14 +273,14 @@ stages:
                                      -l log/jmeter/stress-test-result.csv \
                                      -e -f -o log/jmeter/stress-test-html-report \
                                      -j log/jmeter/jmeter-stress-test.log
-      displayName: JMeter Stress Test @ '$(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)'
+      displayName: JMeter Stress Test
     - bash: |
         echo Starting Standalone Endurance Test 
         apache-jmeter-5.4/bin/jmeter -n -t automatedtesting/jmeter/endurance-test.jmx \
                                      -l log/jmeter/endurance-test-result.csv \
                                      -e -f -o log/jmeter/endurance-test-html-report \
                                      -j log/jmeter/jmeter-endurance-test.log
-      displayName: JMeter Endurance Test @ '$(Date:yyyyMMdd)-$(Hours)$(Minutes)$(Seconds)'
+      displayName: JMeter Endurance Test
     - task: ArchiveFiles@2
       displayName: Archive JMeter stress test HTML report
       inputs:
@@ -343,55 +310,3 @@ stages:
         targetPath: '$(System.DefaultWorkingDirectory)/log/jmeter'
         artifactName: 'drop-jmeter-logs'
 
-#- stage: Destroy
-#  jobs:
-#  - job: destroy_azure_infrastructure
-#    displayName: Destroy Azure Infrastructure
-#    pool:
-#      vmImage: 'ubuntu-latest'
-#    steps:
-#    - task: DownloadSecureFile@1
-##      name: tfvardef
-#      displayName: Download terraform.tfvars
-#      inputs:
-##        secureFile: 'terraform.tfvars' 
-#
-#    # Needed for Terraform VM deployment
-#    - task: InstallSSHKey@0
-#      inputs:
-#        knownHostsEntry: 'known_hosts'
-#        sshPublicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBDTjvuUwKp9tSdFrq9rtdjVTj8eO3oAigT5XbyNSPKaN4N6kZesvn9IJSjAo4DT5UTOrjNVpARjRuQFsyNo9ko7Ig6RnmAOYt3i7iw5IyeyHRa+OengzGrPVI1kiiN0vlezUJa89Gzf9rUR6X0r9WhonxRB9J26MS0HuQleMFBUGgeQU37kftvaSAP+f0L1pbMz2+/3k8nYvix9To9sDUPCOJ827VG4cBne5bUU1lWyd00xROPboQMX2VTSLsS2iHHmsZfdARm6zAO/RCXTRwc8+MGxw2TkiwHxYNDFQA0QnjC9Se4SMVPtGZEz9Mhimi9hJTk5/uT7OMpE4hmj3v
-#        sshKeySecureFile: 'udacity_azure'
-#
-#    - bash: |
-#        cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
-#      displayName: Copy terraform.tfvars
-#
-#    # install Terraform Azure Pipelines Extension by Microsoft DevLabs
-#    # https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
-#    - task: TerraformInstaller@0
-#      displayName: Install Terraform
-#      inputs:
-#        terraformVersion: '0.13.5'#
-#
-#    - task: TerraformTaskV1@0
-#      displayName: Terraform Init
-#      inputs:
-#        provider: 'azurerm'
-#        command: 'init'
-#        backendServiceArm: 'tstate-sc'
-#        backendAzureRmResourceGroupName: 'tstate-rg'
-#        backendAzureRmStorageAccountName: 'tstatestact01'
-#        backendAzureRmContainerName: 'tstate-container'
-#        backendAzureRmKey: 'terraform.tfstate'
-#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-#
-#    - task: TerraformTaskV1@0
-#      displayName: Terraform Destroy
-#      inputs:
-#        provider: 'azurerm'
-#        command: 'destroy'
-#        commandOptions: |
-#          -auto-approve 
-#        workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
-#        environmentServiceNameAzureRM: 'tstate-sc'
