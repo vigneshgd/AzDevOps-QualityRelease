@@ -2,16 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 import datetime
-import sys
 
-class Logger(object):
-    def __init__(self, filename="selenium-test-results.log"):
-        self.terminal = sys.stdout
-        self.log = open(filename, "a")
-
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)
 
 def timestamp():
     ts = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -58,7 +49,6 @@ def remove_cart(driver, n_items):
 
 
 if __name__ == "__main__":
-    sys.stdout = Logger("selenium-test-results.log")
     N_ITEMS = 6
     TEST_USERNAME = 'standard_user'
     TEST_PASSWORD = 'secret_sauce'

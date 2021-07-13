@@ -186,7 +186,7 @@ stages:
               deploymentMethod: zipDeploy
 
   - deployment: deployment_vm
-    displayName: Deploying Virtual Machine
+    displayName: Deploying Virtual Machine and Install Selenium
     pool:
       vmImage: 'ubuntu-latest'    
     environment: 'test'
@@ -225,7 +225,7 @@ stages:
 - stage: test
   jobs:
   - deployment: test_vm
-    displayName: Test on Virtual Machine
+    displayName: Run Selenium Tests on VM
     environment: 'test'
     strategy:
       runOnce:
@@ -238,7 +238,7 @@ stages:
               pwd
               ls -lart
               sudo mkdir -p /var/log/selenium
-              sudo chmod 664 /var/log/selenium
+              sudo chmod 777 /var/log/selenium
               sudo python3 -u selenium-test.py 2>&1 | sudo tee -a /var/log/selenium/selenium-test.log
               cd $(System.DefaultWorkingDirectory)
               # copying selenium logs to $(System.DefaultWorkingDirectory)/log/selenium/
@@ -246,8 +246,6 @@ stages:
               pwd
               sudo cp /var/log/selenium/selenium-test.log log/selenium/selenium-test.log
               ls -lart
-              echo Here is the selenium test results
-              sudo cat /var/log/selenium/selenium-test.log
               
             displayName: Run selenium tests
           - task: PublishPipelineArtifact@1
