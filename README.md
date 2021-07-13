@@ -96,3 +96,9 @@ Make sure `terraform apply` command is successful without any errors. Next, dele
 15. Verify Azure Monitor Logs collected from the Log Analytics agent installed on the deployed VM.
 
     ![image](https://user-images.githubusercontent.com/52568208/125409518-f8418400-e389-11eb-9efb-f065b5bd69d7.png)
+
+16. Overall, you should see a successful pipeline run, various artifacts published during each stage of the pipeline run and status of test results during each stage. 
+
+![image](https://user-images.githubusercontent.com/52568208/125409915-5ec6a200-e38a-11eb-8db6-24578a4b3dc9.png)
+
+![image](https://user-images.githubusercontent.com/52568208/125409992-70a84500-e38a-11eb-937f-5f89008b0345.png)
