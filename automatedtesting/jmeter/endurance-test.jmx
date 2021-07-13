@@ -60,7 +60,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename">C:\Users\vg2381\Documents\ATT\Certifications\AzDevOps-QualityRelease\automatedtesting\jmeter\jmeter-endurance-test.log</stringProp>
         </ResultCollector>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Books" enabled="true">
@@ -212,7 +212,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename">C:\Users\vg2381\Documents\ATT\Certifications\AzDevOps-QualityRelease\automatedtesting\jmeter\EnduranceTestResults.csv</stringProp>
+        <stringProp name="filename">C:\Users\vg2381\Documents\ATT\Certifications\AzDevOps-QualityRelease\automatedtesting\jmeter\endurance-test-result.csv</stringProp>
       </ResultCollector>
       <hashTree/>
     </hashTree>
